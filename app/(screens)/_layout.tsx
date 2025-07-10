@@ -10,7 +10,7 @@ export default function RootLayout() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="splash" />
       <Stack.Screen name="login" />
-      <Stack.Screen name="tabs" />
+      <Stack.Screen name="maps" options={{ headerShown: false }} />      
     </Stack>
   );
 }

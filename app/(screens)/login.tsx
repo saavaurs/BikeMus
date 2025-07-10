@@ -22,7 +22,7 @@ export default function LoginScreen() {
     // TODO: Implementasi login logic
     alert(`NIM: ${nim}\nPassword: ${password}\nIngat saya: ${rememberMe}`);
     // router.replace("/home"); // Setelah login sukses, arahkan ke halaman berikutnya
-     router.replace("../tabs/beranda");
+     router.replace("/maps");
   };
 
   return (
