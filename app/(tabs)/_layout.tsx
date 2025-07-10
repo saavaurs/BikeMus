@@ -1,45 +1,59 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+import { Tabs } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import TabBarIcon from "../../components/TabBarIcon";
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+export default function Layout() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
+    <>
+      <StatusBar style="dark" backgroundColor="#fff" />
+      <Tabs
+        screenOptions={{
+          headerShown: false,
+          tabBarActiveTintColor: "#232265",
+          tabBarInactiveTintColor: "#a1a1aa",
+          tabBarStyle: {
+            backgroundColor: "#fff",
+            borderTopLeftRadius: 24,
+            borderTopRightRadius: 24,
+            height: 68,
+            paddingBottom: 12,
+            paddingTop: 8,
+            shadowColor: "#000",
+            shadowOpacity: 0.07,
+            shadowRadius: 6,
+            elevation: 3,
           },
-          default: {},
-        }),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          tabBarLabelStyle: { fontSize: 13, fontWeight: "600", marginBottom: 4 },
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="beranda"
+          options={{
+            tabBarLabel: "Beranda",
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon name="home" color={color} focused={focused} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="scanqr"
+          options={{
+            tabBarLabel: "Scan QR",
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon name="qrcode" color={color} focused={focused} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="aktivitas"
+          options={{
+            tabBarLabel: "Aktivitas",
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon name="clock" color={color} focused={focused} />
+            ),
+          }}
+        />
+      </Tabs>
+    </>
   );
 }
