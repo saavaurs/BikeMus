@@ -1,15 +1,16 @@
+// login.tsx
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-  View,
+  Image,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
   Text,
   TextInput,
-  StyleSheet,
   TouchableOpacity,
-  Image,
-  StatusBar,
-  SafeAreaView
+  View
 } from "react-native";
-import { useRouter } from "expo-router";
 
 export default function LoginScreen() {
   const [nim, setNim] = useState("");
@@ -19,10 +20,8 @@ export default function LoginScreen() {
   const router = useRouter();
 
   const handleLogin = () => {
-    // TODO: Implementasi login logic
     alert(`NIM: ${nim}\nPassword: ${password}\nIngat saya: ${rememberMe}`);
-    // router.replace("/home"); // Setelah login sukses, arahkan ke halaman berikutnya
-     router.replace("/maps");
+    router.replace("/maps");
   };
 
   return (
@@ -38,12 +37,14 @@ export default function LoginScreen() {
           />
           <Text style={styles.brand}>BikeMus</Text>
         </View>
+
         {/* Form */}
         <View style={styles.form}>
           <Text style={styles.title}>Masuk</Text>
           <Text style={styles.subtitle}>
             Login ke akunmu dan temukan sepeda terdekat.
           </Text>
+
           <View style={styles.inputGroup}>
             <Text style={styles.label}>NIM</Text>
             <TextInput
@@ -56,6 +57,7 @@ export default function LoginScreen() {
               keyboardType="default"
             />
           </View>
+
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Password</Text>
             <View style={styles.passwordWrap}>
@@ -84,7 +86,7 @@ export default function LoginScreen() {
               </TouchableOpacity>
             </View>
           </View>
-          {/* Remember Me */}
+
           <TouchableOpacity
             style={styles.rememberRow}
             onPress={() => setRememberMe((prev) => !prev)}
@@ -99,7 +101,7 @@ export default function LoginScreen() {
             </View>
             <Text style={styles.rememberText}>Ingat saya</Text>
           </TouchableOpacity>
-          {/* Login Button */}
+
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <Text style={styles.buttonText}>Masuk</Text>
           </TouchableOpacity>
@@ -137,7 +139,8 @@ const styles = StyleSheet.create({
   brand: {
     fontSize: 22,
     fontWeight: "700",
-    color: PRIMARY
+    color: PRIMARY,
+    fontFamily: "Poppins-Bold"
   },
   form: {
     width: "100%",
@@ -146,14 +149,15 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    fontWeight: "700",
     color: "#131313",
-    marginBottom: 4
+    marginBottom: 4,
+    fontFamily: "Poppins-Bold"
   },
   subtitle: {
     fontSize: 13,
     color: "#5A5A5A",
-    marginBottom: 18
+    marginBottom: 18,
+    fontFamily: "Poppins-Regular"
   },
   inputGroup: {
     width: "100%",
@@ -163,7 +167,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: PRIMARY,
     fontWeight: "600",
-    marginBottom: 4
+    marginBottom: 4,
+    fontFamily: "Poppins-Medium"
   },
   input: {
     width: "100%",
@@ -173,7 +178,8 @@ const styles = StyleSheet.create({
     borderColor: "#E6E6E6",
     borderRadius: 8,
     fontSize: 15,
-    backgroundColor: "#fafafa"
+    backgroundColor: "#fafafa",
+    fontFamily: "Poppins-Regular"
   },
   passwordWrap: {
     flexDirection: "row",
@@ -214,7 +220,8 @@ const styles = StyleSheet.create({
   },
   rememberText: {
     fontSize: 14,
-    color: "#232265"
+    color: "#232265",
+    fontFamily: "Poppins-Regular"
   },
   button: {
     width: "100%",
@@ -226,8 +233,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff",
-    fontWeight: "600",
     fontSize: 16,
-    letterSpacing: 0.5
+    letterSpacing: 0.5,
+    fontFamily: "Poppins-Medium"
   }
 });
