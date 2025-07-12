@@ -4,14 +4,14 @@ import MapView, { Marker } from 'react-native-maps';
 import { Stack } from 'expo-router';
 
 const bikeLocations = [
-  { latitude: -6.9725, longitude: 110.4282 },
-  { latitude: -6.9727, longitude: 110.4290 },
-  { latitude: -6.9729, longitude: 110.4285 },
-  { latitude: -6.9731, longitude: 110.4292 },
-  { latitude: -6.9733, longitude: 110.4287 },
-  { latitude: -6.9735, longitude: 110.4294 },
-  { latitude: -6.9737, longitude: 110.4289 },
-  { latitude: -6.9739, longitude: 110.4296 },
+  { latitude: -7.0217861, longitude: 110.4619155 }, // titik pusat UNIMUS
+  { latitude: -7.0217000, longitude: 110.4618000 }, // dekat gedung A
+  { latitude: -7.0218500, longitude: 110.4620000 }, // dekat parkiran utama
+  { latitude: -7.0219200, longitude: 110.4617000 }, // belakang rektorat
+  { latitude: -7.0217400, longitude: 110.4621000 }, // depan perpustakaan
+  { latitude: -7.0216600, longitude: 110.4619000 }, // area mushola
+  { latitude: -7.0218100, longitude: 110.4616000 }, // taman tengah
+  { latitude: -7.0218800, longitude: 110.4622000 }, // samping lab komputer
 ];
 
 export default function MapsScreen() {
@@ -21,8 +21,8 @@ export default function MapsScreen() {
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: -6.9730, // UNIMUS center
-          longitude: 110.4290,
+          latitude: -7.0217861, // UNIMUS center
+          longitude:110.4619155,
           latitudeDelta: 0.003,
           longitudeDelta: 0.003,
         }}
