@@ -21,7 +21,7 @@ export default function LoginScreen() {
 
   const handleLogin = () => {
     alert(`NIM: ${nim}\nPassword: ${password}\nIngat saya: ${rememberMe}`);
-    router.replace("/maps");
+    router.replace("/");
   };
 
   return (
