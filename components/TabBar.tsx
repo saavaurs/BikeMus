@@ -1,16 +1,11 @@
-import { View, TouchableOpacity, StyleSheet, LayoutChangeEvent, Animated } from 'react-native';
-import { Text, PlatformPressable, Layout } from '@react-navigation/elements';
+import { View, TouchableOpacity, StyleSheet, LayoutChangeEvent} from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import TabBarButton from './TabBarButton';
-import { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 
-export function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
-  // const icon = {
-  //   index: (props: any) => <Feather name='home' size={24} {...props} />,
-  //   explore: (props: any) => <Feather name='compass' size={24} {...props} />,
-  //   profile: (props: any) => <Feather name='user' size={24} {...props} />,
-  // };
+export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
+  
   const [dimensions, setDimensions] = useState({ height: 20, width: 100 });
 
   const buttonWidth = dimensions.width / state.routes.length;
@@ -38,7 +33,7 @@ export function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) 
         borderRadius: 30,
         marginHorizontal: 12,
         height: dimensions.height - 15,
-        width: buttonWidth - 0.8,
+        width: buttonWidth - 25,
       }]} />
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
@@ -53,8 +48,7 @@ export function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) 
 
         const onPress = () => {
           tabPositionX.value = withSpring(buttonWidth * index, {
-            damping: 15,
-            stiffness: 120,
+            duration: 1500
           });
 
           const event = navigation.emit({
@@ -64,7 +58,7 @@ export function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) 
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name);
+            navigation.navigate(route.name, route.params);
           }
         };
 
@@ -125,8 +119,8 @@ const styles = StyleSheet.create({
       width: 0,
       height: 10,
     },
+    shadowRadius: 10,
     shadowOpacity: 0.1,
-    elevation: 5,
   },
   // tabbarItem: {
   //   flex: 1,

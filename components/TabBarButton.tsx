@@ -3,20 +3,19 @@ import React, { useEffect } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 import Animated, { interpolate, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 
-const TabBarButton = ({ onPress, onLongPress, isFocused, routeName, color, label }: { 
-   onPress: () => void;
-   onLongPress: () => void;
-   isFocused: boolean;
-   routeName: string;
-   color: string;
-   label: string;
+const TabBarButton = ({ onPress, onLongPress, isFocused, routeName, color, label }: {
+  onPress: Function;
+  onLongPress: Function;
+  isFocused: boolean;
+  routeName: string;
+  color: string;
+  label: string;
 }) => {
-  const scale = useSharedValue (0);
+  const scale = useSharedValue(0);
 
   useEffect(() => {
     scale.value = withSpring(typeof isFocused === 'boolean' ? (isFocused ? 1 : 0) : isFocused, {
-      damping: 12,
-      stiffness: 120,
+      duration: 350
     });
   }, [scale, isFocused]);
 
@@ -26,11 +25,11 @@ const TabBarButton = ({ onPress, onLongPress, isFocused, routeName, color, label
     const top = interpolate(scale.value, [0, 1], [0, 9]);
 
     return {
-      transform: [{ 
-        scale: scaleValue 
+      transform: [{
+        scale: scaleValue
       }],
-      top 
-    };
+      top
+    }
   });
 
   const animatedTextStyle = useAnimatedStyle(() => {
@@ -48,12 +47,12 @@ const TabBarButton = ({ onPress, onLongPress, isFocused, routeName, color, label
       style={styles.tabbarItem}
     >
       <Animated.View style={animatedIconStyle}>
-      {icon[routeName] && icon[routeName]({
-  color: isFocused ? '#FFF' : '#222',
-})}
+        {icon[routeName]({
+          color: isFocused ? '#673ab7' : '#222',
+        })}
       </Animated.View>
-      <Animated.Text 
-      style={[{ color: isFocused ? '#673ab7' : '#222', fontSize: 12 }, animatedTextStyle]}>
+      <Animated.Text
+        style={[{ color: isFocused ? '#673ab7' : '#222', fontSize: 12 }, animatedTextStyle]}>
         {label}
       </Animated.Text>
     </Pressable>
@@ -67,6 +66,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 5, // di icon
+    gap: 5, // di icon
   },
 })
