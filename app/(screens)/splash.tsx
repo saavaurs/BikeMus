@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { View, Text, Image, StyleSheet, StatusBar, TouchableOpacity } from "react-native";
+// splash.tsx
 import { useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
+import React, { useCallback, useEffect, useState } from "react";
+import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-// Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
 export default function SplashScreenBikeMus() {
@@ -13,7 +13,6 @@ export default function SplashScreenBikeMus() {
   useEffect(() => {
     async function prepare() {
       try {
-        // Optional: simulate loading
         await new Promise(resolve => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
@@ -37,13 +36,16 @@ export default function SplashScreenBikeMus() {
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      
       {/* Logo & Title */}
       <View style={styles.header}>
         <Image source={require("../../assets/images/logoBikeMus.png")} style={styles.logo} resizeMode="contain" />
         <Text style={styles.brand}>BikeMus</Text>
       </View>
+
       {/* Illustration */}
       <Image source={require("../../assets/images/launch.png")} style={styles.illustration} resizeMode="contain" />
+
       {/* Welcome Text & Button */}
       <View style={styles.bottomSection}>
         <Text style={styles.title}>Selamat datang di BikeMus</Text>
@@ -54,6 +56,7 @@ export default function SplashScreenBikeMus() {
           <Text style={styles.buttonText}>Mulai</Text>
         </TouchableOpacity>
       </View>
+
       {/* Optional decorative stars */}
       <Image source={require("../../assets/images/star.png")} style={styles.cornerTopLeft} />
       <Image source={require("../../assets/images/star.png")} style={styles.cornerBottomRight} />
@@ -89,6 +92,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: PRIMARY,
     letterSpacing: 0.5,
+    fontFamily: "Poppins-Bold"
   },
   illustration: {
     width: 220,
@@ -107,6 +111,7 @@ const styles = StyleSheet.create({
     color: "#131313",
     marginBottom: 8,
     textAlign: "center",
+    fontFamily: "Poppins-Bold"
   },
   subtitle: {
     fontSize: 14,
@@ -114,6 +119,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 30,
     maxWidth: 240,
+    fontFamily: "Poppins-Regular"
   },
   button: {
     backgroundColor: PRIMARY,
@@ -128,6 +134,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     letterSpacing: 0.5,
+    fontFamily: "Poppins-Medium"
   },
   cornerTopLeft: {
     position: "absolute",
