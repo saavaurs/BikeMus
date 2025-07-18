@@ -1,50 +1,25 @@
-// splash.tsx
 import { useRouter } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
-import React, { useCallback, useEffect, useState } from "react";
 import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-SplashScreen.preventAutoHideAsync();
-
-export default function SplashScreenBikeMus() {
-  const [appIsReady, setAppIsReady] = useState(false);
+export default function LaunchScreen() {
   const router = useRouter();
 
-  useEffect(() => {
-    async function prepare() {
-      try {
-        await new Promise(resolve => setTimeout(resolve, 2000));
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        setAppIsReady(true);
-      }
-    }
-    prepare();
-  }, []);
-
-  const onLayoutRootView = useCallback(() => {
-    if (appIsReady) {
-      SplashScreen.hideAsync();
-    }
-  }, [appIsReady]);
-
-  if (!appIsReady) {
-    return null;
-  }
+  const handleGetStarted = () => {
+    router.push("/login");
+  };
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      
+
       {/* Logo & Title */}
       <View style={styles.header}>
-        <Image source={require("../../assets/images/logoBikeMus.png")} style={styles.logo} resizeMode="contain" />
+        <Image source={require('../assets/images/logoBikeMus.png')} style={styles.logo} resizeMode="contain" />
         <Text style={styles.brand}>BikeMus</Text>
       </View>
 
       {/* Illustration */}
-      <Image source={require("../../assets/images/launch.png")} style={styles.illustration} resizeMode="contain" />
+      <Image source={require("../assets/images/launch.png")} style={styles.illustration} resizeMode="contain" />
 
       {/* Welcome Text & Button */}
       <View style={styles.bottomSection}>
@@ -52,14 +27,14 @@ export default function SplashScreenBikeMus() {
         <Text style={styles.subtitle}>
           Temukan & Pakai Sepeda Kampusmu, Kini Lebih Mudah
         </Text>
-        <TouchableOpacity style={styles.button} onPress={() => router.replace("/login")}>
+        <TouchableOpacity style={styles.button} onPress={handleGetStarted}>
           <Text style={styles.buttonText}>Mulai</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Optional decorative stars */}
-      <Image source={require("../../assets/images/star.png")} style={styles.cornerTopLeft} />
-      <Image source={require("../../assets/images/star.png")} style={styles.cornerBottomRight} />
+      {/* Decorative Stars */}
+      <Image source={require("../assets/images/star.png")} style={styles.cornerTopLeft} />
+      <Image source={require("../assets/images/star.png")} style={styles.cornerBottomRight} />
     </View>
   );
 }

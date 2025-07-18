@@ -1,20 +1,24 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View } from "react-native";
 
-const Page = () => {
+export default function BerandaScreen() {
   return (
     <View style={styles.container}>
-      <Text>Explore Screen</Text>
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.title}>Beranda</Text>
+      </View>
+
+      {/* Konten utama */}
+      <View style={styles.content}>
+        <Text>Selamat datang di BikeMus!</Text>
+      </View>
     </View>
-  )
+  );
 }
 
-export default Page;
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  container: { flex: 1, backgroundColor: "#fff" },
+  header: { padding: 20 },
+  title: { fontSize: 20, fontFamily: "Poppins-Bold" },
+  content: { flex: 1, justifyContent: "center", alignItems: "center" },
 });

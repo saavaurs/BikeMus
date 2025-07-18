@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
 import { Stack } from 'expo-router';
+import React from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 
 const bikeLocations = [
   { latitude: -7.0217861, longitude: 110.4619155 }, // titik pusat UNIMUS
@@ -36,7 +36,7 @@ export default function MapsScreen() {
             description="Lokasi Sepeda"
           >
             <Image
-              source={require('../../assets/images/bike_marker.png')}
+              source={require('../assets/images/bike_marker.png')}
               style={{ width: 36, height: 36 }}
               resizeMode="contain"
             />
