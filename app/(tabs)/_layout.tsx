@@ -5,7 +5,7 @@ export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#8B1C3F',
+        tabBarActiveTintColor: '#201E67',
         tabBarInactiveTintColor: '#666',
         tabBarStyle: {
           backgroundColor: '#fff',
@@ -32,7 +32,7 @@ export default function TabsLayout() {
               style={{
                 width: 24,
                 height: 24,
-                tintColor: focused ? '#8B1C3F' : '#666',
+                tintColor: focused ? '#201E67' : '#666',
               }}
             />
           ),
@@ -48,7 +48,7 @@ export default function TabsLayout() {
               style={{
                 width: 24,
                 height: 24,
-                tintColor: focused ? '#8B1C3F' : '#666',
+                tintColor: focused ? '#201E67' : '#666',
               }}
             />
           ),
@@ -64,7 +64,7 @@ export default function TabsLayout() {
               style={{
                 width: 24,
                 height: 24,
-                tintColor: focused ? '#8B1C3F' : '#666',
+                tintColor: focused ? '#201E67' : '#666',
               }}
             />
           ),
