@@ -40,7 +40,7 @@ export default function HomeScreen() {
         <View style={styles.header}>
           <TouchableOpacity onPress={handleMenuPress} style={styles.menuButton}>
             <Image
-              source={require("../../assets/images/sidebar.png")}
+              source={require("../../assets/images/menu.png")}
               style={styles.sidebarIcon}
               resizeMode="contain"
             />
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingTop: 45,
-    paddingBottom: 30,
+    paddingBottom: 10,
     backgroundColor: "#fff",
   },
   menuButton: {
@@ -201,25 +201,27 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   logoHeader: {
-    width: 26,
-    height: 26,
-    marginRight: 6,
+    width: 28,
+    height: 28,
+    marginRight: 1,
   },
   brandHeader: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "700",
     color: PRIMARY,
     fontFamily: "Poppins-Bold",
     lineHeight: 24,
   },
   sidebarIcon: {
-    width: 24,
-    height: 24,
+    width: 26,
+    height: 26,
     tintColor: "#232265",
+    marginTop: 6, // tambahkan ini untuk menurunkan posisi
   },
   profileSection: {
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingVertical: 4,
+    marginBottom: 10,
   },
   profileInfo: {
     flexDirection: "row",
@@ -251,7 +253,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginBottom: 20,
     borderRadius: 12,
-    padding: 20,
+    padding: 30,
     flexDirection: "row",
     alignItems: "center",
     position: "relative",
