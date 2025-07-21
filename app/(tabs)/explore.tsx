@@ -72,22 +72,22 @@ export default function HomeScreen() {
         </View>
 
         {/* Promo Card */}
-        <View style={styles.promoCard}>
-          <View style={styles.promoContent}>
-            <Text style={styles.promoText}>Cari, pinjam, kayuh! Semua bisa</Text>
-            <Text style={styles.promoText}>lewat BikeMus 🚴</Text>
-            <View style={styles.promoActionContainer}>
-              <Text style={styles.promoAction}>Yuk pakai </Text>
-              <Text style={styles.promoHighlight}>BikeMus</Text>
-            </View>
-            <Text style={styles.promoAction}>sekarang!</Text>
-          </View>
-          <View style={styles.promoImageContainer}>
-            <Image
-              source={require("../../assets/images/ilustrasiorangsepeda.png")}
-              style={styles.promoImage}
-              resizeMode="contain"
-            />
+<View style={styles.promoCard}>
+  <View style={styles.promoContent}>
+    <Text style={styles.promoBigText}>
+      Yuk pakai <Text style={styles.promoHighlight}>BikeMus</Text>
+    </Text>
+    <Text style={styles.promoSubText}>
+      Cari, pinjam, kayuh! Semua bisa lewat BikeMus 🚴
+    </Text>
+  </View>
+  <View style={styles.promoImageContainer}>
+    <Image
+      source={require("../../assets/images/ilustrasiorangsepeda.png")}
+      style={styles.promoImage}
+      resizeMode="contain"
+    />
+  
             {/* Decorative stars */}
             <View style={[styles.star, styles.star1]}>
               <Text style={styles.starText}>★</Text>
@@ -240,59 +240,78 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     color: "#333",
-    fontFamily: "Poppins-SemiBold",
-    marginBottom: 2,
+    fontFamily: "Poppins-Bold",
+    marginBottom: 0,
+   
   },
   userName: {
     fontSize: 12,
     color: "#666",
-    fontFamily: "Poppins-Regular",
+    fontFamily: "Poppins-Medium",
+    marginTop: -4,
   },
   promoCard: {
-    backgroundColor: PROMO_BLUE,
-    marginHorizontal: 20,
-    marginBottom: 20,
-    borderRadius: 12,
-    padding: 30,
-    flexDirection: "row",
-    alignItems: "center",
-    position: "relative",
-    overflow: "hidden",
-  },
-  promoContent: {
-    flex: 1,
-  },
-  promoText: {
-    fontSize: 13,
-    color: "#333",
-    fontFamily: "Poppins-Regular",
-    lineHeight: 18,
-  },
-  promoActionContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 5,
-  },
-  promoAction: {
-    fontSize: 15,
-    fontWeight: "600",
-    color: "#333",
-    fontFamily: "Poppins-SemiBold",
-  },
-  promoHighlight: {
-    fontSize: 15,
-    fontWeight: "600",
-    color: PRIMARY,
-    fontFamily: "Poppins-SemiBold",
-  },
-  promoImageContainer: {
-    position: "relative",
-    marginLeft: 10,
-  },
-  promoImage: {
-    width: 110,
-    height: 90,
-  },
+  backgroundColor: PROMO_BLUE,
+  marginHorizontal: 20,
+  marginBottom: 20,
+  borderRadius: 12,
+  paddingVertical: 20,
+  paddingHorizontal: 16,
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+},
+
+promoContent: {
+  flex: 1,
+  paddingRight: 10,
+},
+
+
+  promoBigText: {
+  fontSize: 18,
+  fontFamily: "Poppins-Bold",
+  color: "#000",
+  marginBottom: 6,
+},
+
+promoSubText: {
+  fontSize: 14,
+  color: "#333",
+  fontFamily: "Poppins-Italic",
+  lineHeight: 18,
+},
+
+promoHighlight: {
+  color: PRIMARY,
+  fontFamily: "Poppins-Bold",
+},
+
+promoImageContainer: {
+  width: 100,
+  height: 100,
+  justifyContent: "center",
+  alignItems: "center",
+},
+
+promoImage: {
+  width: "100%",
+  height: "100%",
+},
+
+  // promoActionContainer: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   marginTop: 5,
+  // },
+  // promoAction: {
+  //   fontSize: 15,
+  //   fontWeight: "600",
+  //   color: "#333",
+  //   fontFamily: "Poppins-SemiBold",
+  // },
+  
+  
   star: {
     position: "absolute",
   },
@@ -330,7 +349,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     color: "#333",
-    fontFamily: "Poppins-SemiBold",
+    fontFamily: "Poppins-Bold",
     marginRight: 5,
   },
   mapIconContainer: {
@@ -459,15 +478,16 @@ const styles = StyleSheet.create({
     backgroundColor: PRIMARY,
     marginHorizontal: 20,
     marginVertical: 15,
-    borderRadius: 20,
+    borderRadius: 30,
     paddingVertical: 12,
     alignItems: "center",
+    fontFamily : "Poppins-Medium",
   },
   fullMapButtonText: {
     color: "#fff",
     fontSize: 14,
     fontWeight: "600",
-    fontFamily: "Poppins-SemiBold",
+    fontFamily: "Poppins-Medium",
   },
   bottomNav: {
     height: 70,
