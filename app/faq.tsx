@@ -25,8 +25,8 @@ const faqData: FAQItem[] = [
     answer: "Untuk meminjam sepeda, buka aplikasi BikeMus, pilih sepeda yang tersedia di peta, scan QR code pada sepeda, dan sepeda siap digunakan."
   },
   {
-    question: "Berapa lama maksimal peminjaman sepeda?",
-    answer: "Maksimal peminjaman sepeda adalah 2 jam per sesi. Jika melebihi batas waktu, akan dikenakan denda sesuai ketentuan yang berlaku."
+    question: "Berapa lama waktu sepeda akan ganti klaim?",
+    answer: "Jika 5 menit tidak ada aktivitas, sepeda akan otomatis mengunci dan sesi peminjaman berakhir."
   },
   {
     question: "Bagaimana cara mengembalikan sepeda?",
@@ -42,7 +42,7 @@ const faqData: FAQItem[] = [
   },
   {
     question: "Apakah bisa meminjam sepeda untuk orang lain?",
-    answer: "Tidak, setiap peminjaman sepeda hanya berlaku untuk akun yang melakukan peminjaman. Tidak diperkenankan meminjamkan ke orang lain."
+    answer: "Tidak, setiap peminjaman sepeda hanya berlaku untuk akun yang melakukan peminjaman. Tidak diperkenankan meminjamkan ke orang lain. dan ini khuusus untuk anak UNIMUS saja"
   }
 ];
 
@@ -66,26 +66,20 @@ export default function FAQScreen() {
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
-          <Image
-            source={require("../assets/images/back.png")} // Sesuaikan dengan nama file back icon Anda
-            style={styles.backIcon}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>FAQ</Text>
-      </View>
+      {/* Tombol Back */}
+      <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+        <Image
+          source={require("../assets/images/back.png")}
+          style={styles.backIcon}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
+      
+      {/* Tulisan Detail */}
+      <Text style={styles.detailTitle}>FAQ</Text>
 
       {/* FAQ Content */}
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        <View style={styles.content}>
-          <Text style={styles.title}>Frequently Asked Questions</Text>
-          <Text style={styles.subtitle}>
-            Temukan jawaban untuk pertanyaan yang sering ditanyakan tentang BikeMus
-          </Text>
-
           <View style={styles.faqList}>
             {faqData.map((item, index) => (
               <View key={index} style={styles.faqItem}>
@@ -117,7 +111,7 @@ export default function FAQScreen() {
               Hubungi customer service kami di email: support@bikemus.com
             </Text>
           </View>
-        </View>
+        
       </ScrollView>
     </SafeAreaView>
   );
@@ -128,36 +122,36 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-  },
+  //style back button
   backButton: {
-    padding: 12,
-    marginRight: 100,
-    marginTop: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  position: 'absolute',
+  top: 55, // dinaikkan agar tidak nabrak status bar
+  left: 20,
+  zIndex: 10,
+  padding: 6,
+  borderRadius: 20,
+},
+
+//style detail title
+detailTitle: {
+  color: '#000',
+  fontSize: 20,
+  fontWeight: '600',
+  fontFamily: 'Poppins-Medium',
+  marginTop: 60, // kasih jarak setelah tombol back
+  textAlign: 'center', // tambahkan ini
+},
+
+//ukuran icon back
   backIcon: {
-    width: 32,
-    height: 32,
-    tintColor: '#333',
+    width: 34,
+    height: 34,
+    tintColor: '#000', // Ubah atau hapus jika ikonmu sudah berwarna
   },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: "600",
-    color: PRIMARY,
-    fontFamily: "Poppins-SemiBold",
-    flex: 1,
-    textAlign: 'center',
-    marginTop: 5,
-    marginRight: 100, // Untuk mengimbangi backButton yang punya marginRight
-  },
+
   container: {
-    flex: 1,
+    flex: 2,
+    padding: 20,
     backgroundColor: "#fff",
   },
   content: {

@@ -2,234 +2,103 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-  Alert,
   Image,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
-import Sidebar from "../components/Sidebar";
 
 const PRIMARY = "#232265";
 
 export default function ProfileScreen() {
   const router = useRouter();
   const [sidebarVisible, setSidebarVisible] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [profileData, setProfileData] = useState({
-    name: "Addina Zahra Maharani Yumiawan",
+  const [profileData] = useState({
+    name: "Addina Zahra Maharani Yurniawan",
     nim: "C2C023043",
-    email: "addina.zahra@student.unsoed.ac.id",
-    phone: "081234567890",
-    faculty: "Fakultas Teknik",
-    major: "Teknik Informatika",
+    faculty: "Fakultas Teknik dan Ilmu Komputer",
+    major: "Informatika",
+    university: "University California",
   });
-
-  const [editData, setEditData] = useState(profileData);
 
   const handleMenuPress = () => {
     setSidebarVisible(true);
   };
 
-  const handleCloseSidebar = () => {
-    setSidebarVisible(false);
-  };
-
-  const handleEdit = () => {
-    setIsEditing(true);
-    setEditData(profileData);
-  };
-
-  const handleSave = () => {
-    setProfileData(editData);
-    setIsEditing(false);
-    Alert.alert("Berhasil", "Profil berhasil diperbarui");
-  };
-
-  const handleCancel = () => {
-    setIsEditing(false);
-    setEditData(profileData);
-  };
-
-  const updateEditData = (field: string, value: string) => {
-    setEditData(prev => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
+  const menuItems = [
+    { 
+      icon: require("../assets/images/setting.png"), 
+      title: "Pengaturan", 
+      color: "#4CAF50" 
+    },
+    { 
+      icon: require("../assets/images/bantuan.png"), 
+      title: "Pusat Bantuan", 
+      color: "#2196F3" 
+    },
+    { 
+      icon: require("../assets/images/logout.png"), 
+      title: "Keluar", 
+      color: "#FF9800" 
+    },
+  ];
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={handleMenuPress} style={styles.menuButton}>
-          <View style={styles.menuIcon}>
-            <View style={styles.menuLine} />
-            <View style={styles.menuLine} />
-            <View style={styles.menuLine} />
-          </View>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Profile</Text>
-        {!isEditing ? (
-          <TouchableOpacity onPress={handleEdit} style={styles.editButton}>
-            <Text style={styles.editButtonText}>Edit</Text>
-          </TouchableOpacity>
-        ) : (
-          <View style={styles.editActions}>
-            <TouchableOpacity onPress={handleCancel} style={styles.cancelButton}>
-              <Text style={styles.cancelButtonText}>Batal</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
-              <Text style={styles.saveButtonText}>Simpan</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </View>
+      <StatusBar barStyle="light-content" backgroundColor={PRIMARY} />
 
       {/* Profile Content */}
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         {/* Profile Image Section */}
         <View style={styles.profileImageSection}>
+
+
+          {/* Tombol Back */}
+<TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+  <Image
+    source={require("../assets/images/back.png")}
+    style={styles.backIcon}
+    resizeMode="contain"
+  />
+</TouchableOpacity>
+
+{/* Tulisan Detail */}
+<Text style={styles.detailTitle}>Profil</Text>
+
+
           <View style={styles.profileImageContainer}>
             <Image
-              source={require("../assets/images/profilee.png")}
+              source={require("../assets/images/ritsukichannn.jpg")}
               style={styles.profileImage}
               resizeMode="cover"
             />
-            {isEditing && (
-              <TouchableOpacity style={styles.changePhotoButton}>
-                <Text style={styles.changePhotoText}>📷</Text>
-              </TouchableOpacity>
-            )}
           </View>
-          <Text style={styles.profileName}>
-            {isEditing ? editData.name : profileData.name}
-          </Text>
-          <Text style={styles.profileNim}>
-            {isEditing ? editData.nim : profileData.nim}
-          </Text>
-        </View>
-
-        {/* Profile Information */}
-        <View style={styles.infoSection}>
-          <Text style={styles.sectionTitle}>Informasi Personal</Text>
           
-          <View style={styles.infoItem}>
-            <Text style={styles.infoLabel}>Nama Lengkap</Text>
-            {isEditing ? (
-              <TextInput
-                style={styles.infoInput}
-                value={editData.name}
-                onChangeText={(text) => updateEditData('name', text)}
-                placeholder="Masukkan nama lengkap"
-              />
-            ) : (
-              <Text style={styles.infoValue}>{profileData.name}</Text>
-            )}
-          </View>
-
-          <View style={styles.infoItem}>
-            <Text style={styles.infoLabel}>NIM</Text>
-            {isEditing ? (
-              <TextInput
-                style={styles.infoInput}
-                value={editData.nim}
-                onChangeText={(text) => updateEditData('nim', text)}
-                placeholder="Masukkan NIM"
-              />
-            ) : (
-              <Text style={styles.infoValue}>{profileData.nim}</Text>
-            )}
-          </View>
-
-          <View style={styles.infoItem}>
-            <Text style={styles.infoLabel}>Email</Text>
-            {isEditing ? (
-              <TextInput
-                style={styles.infoInput}
-                value={editData.email}
-                onChangeText={(text) => updateEditData('email', text)}
-                placeholder="Masukkan email"
-                keyboardType="email-address"
-              />
-            ) : (
-              <Text style={styles.infoValue}>{profileData.email}</Text>
-            )}
-          </View>
-
-          <View style={styles.infoItem}>
-            <Text style={styles.infoLabel}>No. Telepon</Text>
-            {isEditing ? (
-              <TextInput
-                style={styles.infoInput}
-                value={editData.phone}
-                onChangeText={(text) => updateEditData('phone', text)}
-                placeholder="Masukkan no. telepon"
-                keyboardType="phone-pad"
-              />
-            ) : (
-              <Text style={styles.infoValue}>{profileData.phone}</Text>
-            )}
-          </View>
-
-          <View style={styles.infoItem}>
-            <Text style={styles.infoLabel}>Fakultas</Text>
-            {isEditing ? (
-              <TextInput
-                style={styles.infoInput}
-                value={editData.faculty}
-                onChangeText={(text) => updateEditData('faculty', text)}
-                placeholder="Masukkan fakultas"
-              />
-            ) : (
-              <Text style={styles.infoValue}>{profileData.faculty}</Text>
-            )}
-          </View>
-
-          <View style={styles.infoItem}>
-            <Text style={styles.infoLabel}>Jurusan</Text>
-            {isEditing ? (
-              <TextInput
-                style={styles.infoInput}
-                value={editData.major}
-                onChangeText={(text) => updateEditData('major', text)}
-                placeholder="Masukkan jurusan"
-              />
-            ) : (
-              <Text style={styles.infoValue}>{profileData.major}</Text>
-            )}
+          <View style={styles.profileNameSection}>
+            <Text style={styles.profileName}>{profileData.name}</Text>
+            <Text style={styles.profileSubtitle}>{profileData.nim}</Text>
           </View>
         </View>
 
-        {/* Statistics Section */}
-        <View style={styles.statsSection}>
-          <Text style={styles.sectionTitle}>Statistik Penggunaan</Text>
-          <View style={styles.statsContainer}>
-            <View style={styles.statItem}>
-              <Text style={styles.statNumber}>12</Text>
-              <Text style={styles.statLabel}>Total Peminjaman</Text>
-            </View>
-            <View style={styles.statItem}>
-              <Text style={styles.statNumber}>8.5</Text>
-              <Text style={styles.statLabel}>Jam Berkendara</Text>
-            </View>
-            <View style={styles.statItem}>
-              <Text style={styles.statNumber}>0</Text>
-              <Text style={styles.statLabel}>Denda</Text>
-            </View>
-          </View>
+        {/* Menu Items */}
+        <View style={styles.menuSection}>
+          {menuItems.map((item, index) => (
+            <TouchableOpacity key={index} style={styles.menuItem}>
+              <View style={styles.menuItemLeft}>
+                <View style={[styles.menuIconContainer, { backgroundColor: item.color + '20' }]}>
+                  <Image source={item.icon} style={styles.menuItemIcon} resizeMode="contain" />
+                </View>
+                <Text style={styles.menuItemTitle}>{item.title}</Text>
+              </View>
+              <Text style={styles.menuArrow}>›</Text>
+            </TouchableOpacity>
+          ))}
         </View>
       </ScrollView>
-
-      {/* Sidebar */}
-      <Sidebar visible={sidebarVisible} onClose={handleCloseSidebar} />
     </SafeAreaView>
   );
 }
@@ -244,71 +113,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
     paddingVertical: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
+    backgroundColor: PRIMARY,
     justifyContent: "space-between",
   },
   menuButton: {
     padding: 8,
   },
   menuIcon: {
-    width: 20,
-    height: 14,
+    width: 30,
+    height: 30,
     justifyContent: "space-between",
-  },
-  menuLine: {
-    width: "100%",
-    height: 2,
-    backgroundColor: "#333",
-    borderRadius: 1,
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: "600",
-    color: PRIMARY,
-    fontFamily: "Poppins-SemiBold",
-    flex: 1,
-    marginLeft: 15,
-  },
-  editButton: {
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-    backgroundColor: PRIMARY,
-    borderRadius: 20,
-  },
-  editButtonText: {
-    color: "#fff",
-    fontSize: 14,
-    fontWeight: "500",
-    fontFamily: "Poppins-Medium",
-  },
-  editActions: {
-    flexDirection: "row",
-    gap: 10,
-  },
-  cancelButton: {
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-    backgroundColor: "#f0f0f0",
-    borderRadius: 20,
-  },
-  cancelButtonText: {
-    color: "#666",
-    fontSize: 14,
-    fontWeight: "500",
-    fontFamily: "Poppins-Medium",
-  },
-  saveButton: {
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-    backgroundColor: PRIMARY,
-    borderRadius: 20,
-  },
-  saveButtonText: {
-    color: "#fff",
-    fontSize: 14,
-    fontWeight: "500",
-    fontFamily: "Poppins-Medium",
   },
   container: {
     flex: 1,
@@ -316,108 +130,117 @@ const styles = StyleSheet.create({
   },
   profileImageSection: {
     alignItems: "center",
-    paddingVertical: 30,
-    backgroundColor: "#f8f9fa",
+    paddingTop: 40,
+    paddingBottom: 30,
+    backgroundColor: PRIMARY,
+    position: "relative",
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+  },
+
+  //style back button
+  backButton: {
+  position: 'absolute',
+  top: 55, // dinaikkan agar tidak nabrak status bar
+  left: 20,
+  zIndex: 10,
+  padding: 6,
+  borderRadius: 20,
+},
+
+//style detail title
+detailTitle: {
+  color: '#fff',
+  fontSize: 20,
+  fontWeight: '600',
+  fontFamily: 'Poppins-Medium',
+  marginTop: 25, // kasih jarak setelah tombol back
+  marginBottom: 30,
+},
+
+//ukuran icon back
+  backIcon: {
+    width: 34,
+    height: 34,
+    tintColor: '#fff', // Ubah atau hapus jika ikonmu sudah berwarna
   },
   profileImageContainer: {
     position: "relative",
-    marginBottom: 15,
+    marginBottom: 20,
+    zIndex: 2,
   },
   profileImage: {
     width: 100,
     height: 100,
     borderRadius: 50,
-    borderWidth: 3,
-    borderColor: PRIMARY,
+    borderWidth: 4,
+    borderColor: "#fff",
   },
-  changePhotoButton: {
-    position: "absolute",
-    bottom: 0,
-    right: 0,
-    backgroundColor: PRIMARY,
-    width: 30,
-    height: 30,
-    borderRadius: 15,
+  profileNameSection: {
     alignItems: "center",
-    justifyContent: "center",
-  },
-  changePhotoText: {
-    fontSize: 14,
+    zIndex: 2,
   },
   profileName: {
-    fontSize: 20,
-    fontWeight: "600",
-    color: "#333",
-    fontFamily: "Poppins-SemiBold",
-    marginBottom: 5,
-  },
-  profileNim: {
-    fontSize: 16,
-    color: "#666",
-    fontFamily: "Poppins-Regular",
-  },
-  infoSection: {
-    padding: 20,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#333",
-    fontFamily: "Poppins-SemiBold",
-    marginBottom: 20,
-  },
-  infoItem: {
-    marginBottom: 20,
-  },
-  infoLabel: {
-    fontSize: 14,
-    color: "#666",
-    fontFamily: "Poppins-Medium",
-    marginBottom: 8,
-  },
-  infoValue: {
-    fontSize: 16,
-    color: "#333",
-    fontFamily: "Poppins-Regular",
-    paddingVertical: 12,
-    paddingHorizontal: 15,
-    backgroundColor: "#f8f9fa",
-    borderRadius: 10,
-  },
-  infoInput: {
-    fontSize: 16,
-    color: "#333",
-    fontFamily: "Poppins-Regular",
-    paddingVertical: 12,
-    paddingHorizontal: 15,
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#ddd",
-  },
-  statsSection: {
-    padding: 20,
-    backgroundColor: "#f8f9fa",
-    marginTop: 20,
-  },
-  statsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  statItem: {
-    alignItems: "center",
-  },
-  statNumber: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: "700",
-    color: PRIMARY,
+    color: "#fff",
     fontFamily: "Poppins-Bold",
     marginBottom: 5,
   },
-  statLabel: {
-    fontSize: 12,
-    color: "#666",
+  profileSubtitle: {
+    fontSize: 14,
+    color: "rgba(255,255,255,0.8)",
     fontFamily: "Poppins-Regular",
-    textAlign: "center",
+  },
+  menuSection: {
+    padding: 20,
+    paddingTop: 30,
+  },
+  menuItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 15,
+    paddingHorizontal: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f0f0f0",
+  },
+  menuItemLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  menuIconContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 15,
+  },
+  menuItemIcon: {
+    width: 20,
+    height: 20,
+    tintColor: "#222",
+  },
+  menuItemTitle: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#333",
+    fontFamily: "Poppins-Medium",
+  },
+  menuArrow: {
+    fontSize: 20,
+    color: "#ccc",
+    fontWeight: "300",
+  },
+  bottomNav: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 15,
+    gap: 8,
+    backgroundColor: "#fff",
+    borderTopWidth: 1,
+    borderTopColor: "#f0f0f0",
   },
 });
